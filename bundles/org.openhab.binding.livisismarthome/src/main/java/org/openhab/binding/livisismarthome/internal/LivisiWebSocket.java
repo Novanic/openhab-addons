@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 public class LivisiWebSocket {
 
     private final Logger logger = LoggerFactory.getLogger(LivisiWebSocket.class);
+
     private final EventListener eventListener;
     private final URI webSocketURI;
     private final int maxIdleTimeout;
