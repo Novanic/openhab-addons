@@ -35,7 +35,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jetty.client.HttpClient;
-import org.openhab.binding.livisismarthome.internal.LivisiBindingConstants;
 import org.openhab.binding.livisismarthome.internal.LivisiWebSocket;
 import org.openhab.binding.livisismarthome.internal.client.LivisiClient;
 import org.openhab.binding.livisismarthome.internal.client.URLCreator;
@@ -258,7 +257,7 @@ public class LivisiBridgeHandler extends BaseBridgeHandler
      * Schedules a re-initialization in the given future.
      *
      * @param delayed when it is scheduled delayed, it starts with a delay of
-     *            {@link LivisiBindingConstants#REINITIALIZE_DELAY_SECONDS}
+     *            {@link org.openhab.binding.livisismarthome.internal.LivisiBindingConstants#REINITIALIZE_DELAY_SECONDS}
      *            seconds,
      *            otherwise it starts directly
      */
