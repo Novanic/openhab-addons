@@ -1,18 +1,18 @@
-# Livisi SmartHome Binding
+# LIVISI SmartHome Binding
 
-The binding integrates the [Livisi SmartHome](https://www.livisi.de) system into openHAB.
-The binding is a newer version and forked from the innogysmarthome openHAB binding.
-It uses the official API 1.1 as provided by Livisi on the SHC. 
-On your SHC you need a minimum Software Version 1.2.XX.XXX with activated "Local SmartHome". 
+The binding integrates the [LIVISI (RWE/innogy) SmartHome](https://www.livisi.de) system into openHAB.
+The binding is the successor of the innogy SmartHome openHAB binding, which is communicating with the LIVISI cloud-servers over the internet.
 
-As all status updates and commands have to go through the API, a permanent internet connection is NOT required.
-This binding uses a direct communication with the Livisi SmartHome Controller (SHC). It does NOT need to communicate with the Livisi Backend-Servers.
+This binding uses a DIRECT communication with LIVISI SmartHome Controllers (SHC). It does NOT need to communicate with the LIVISI cloud-services and does NOT require an internet connection.
+
+On your SHC you need a minimum Software Version of 1.2.XX.XXX with activated "Local SmartHome". 
+
 
 ## Supported things
 
 ### Bridge
 
-The Livisi SmartHome Controller (SHC) is the bridge, that provides the central communication with the devices.
+The LIVISI SmartHome Controller (SHC) is the bridge, that provides the central communication with the devices.
 Without the SHC, you cannot communicate with the devices.
 At this time, this binding supports only the SHC2 (with support for Bluetooth devices).
 
@@ -48,10 +48,10 @@ Powermeter devices
 
 | Device          | Description                                                    | Supported channels                                                                                                                                                                                         |
 |-----------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AnalogMeter     | The Analog Meter from the Livisi EnergyControl product         | energy_consumption_month_kwh, absolute_energy_consumption, energy_consumption_month_euro, energy_consumption_day_euro, energy_consumption_day_kwh                                                          |
-| GenerationMeter | The Generation Meter from the Livisi PowerControlSolar product | energy_generation_month_kwh, total_energy_generation, energy_generation_month_euro, energy_generation_day_euro, energy_generation_day_kwh, power_generation_watt                                           |
-| SmartMeter      | The Smart Meter from the Livisi PowerControl product.          | energy_consumption_month_kwh, absolute_energy_consumption, energy_consumption_month_euro, energy_consumption_day_euro, energy_consumption_day_kwh, power_consumption_watt                                  |
-| Two-Way-Meter   | The Two-Way-Meter from the Livisi PowerControlSolar product    | energy_month_kwh, total_energy, energy_month_euro, energy_day_euro, energy_day_kwh, energy_feed_month_kwh, total_energy_fed, energy_feed_month_euro, energy_feed_day_euro, energy_feed_day_kwh, power_watt |
+| AnalogMeter     | The Analog Meter from the LIVISI EnergyControl product         | energy_consumption_month_kwh, absolute_energy_consumption, energy_consumption_month_euro, energy_consumption_day_euro, energy_consumption_day_kwh                                                          |
+| GenerationMeter | The Generation Meter from the LIVISI PowerControlSolar product | energy_generation_month_kwh, total_energy_generation, energy_generation_month_euro, energy_generation_day_euro, energy_generation_day_kwh, power_generation_watt                                           |
+| SmartMeter      | The Smart Meter from the LIVISI PowerControl product.          | energy_consumption_month_kwh, absolute_energy_consumption, energy_consumption_month_euro, energy_consumption_day_euro, energy_consumption_day_kwh, power_consumption_watt                                  |
+| Two-Way-Meter   | The Two-Way-Meter from the LIVISI PowerControlSolar product    | energy_month_kwh, total_energy, energy_month_euro, energy_day_euro, energy_day_kwh, energy_feed_month_kwh, total_energy_fed, energy_feed_month_euro, energy_feed_day_euro, energy_feed_day_kwh, power_watt |
 
 ## Discovery
 
@@ -59,7 +59,7 @@ The bridge (SHC) can not be discovered automatically. It must be added manually 
 
 After the bridge is added, devices are discovered automatically.
 As there is no background discovery implemented at the moment, you have to start the discovery manually.
-However, only devices will appear that are added in the Livisi SmartHome app before, as the Livisi Binding does not support the coupling of devices to the bridge.
+However, only devices will appear that are added in the LIVISI SmartHome app before, as the LIVISI Binding does not support the coupling of devices to the bridge.
 
 ## Channels
 
@@ -103,16 +103,16 @@ However, only devices will appear that are added in the Livisi SmartHome app bef
 
 The `rollershutter` channel has a `boolean` parameter `invert`.
 It is `false` by default.
-This means `100` on Livisi is `UP` and `0` is `DOWN`.
-When `invert` is `true` than `0` on Livisi is `UP` and `100` is `DOWN`.
+This means `100` on LIVISI is `UP` and `0` is `DOWN`.
+When `invert` is `true` than `0` on LIVISI is `UP` and `100` is `DOWN`.
 
 
 ## Triggers
 
-| Trigger Type  | Description                                             | Available on thing                                    |
-|---------------|---------------------------------------------------------|-------------------------------------------------------|
-| SHORT_PRESSED | Fired then you press a button                           | BRC8, ISC2, ISD2, ISR2, ISS2, WSC2                    |
-| LONG_PRESSED  | Fired when you press a button longer                    | BRC8, ISC2, ISD2, ISR2, ISS2, WSC2                    |
+| Trigger Type  | Description                          | Available on thing                                    |
+|---------------|--------------------------------------|-------------------------------------------------------|
+| SHORT_PRESSED | Fired when you press a button        | BRC8, ISC2, ISD2, ISR2, ISS2, WSC2                    |
+| LONG_PRESSED  | Fired when you press a button longer | BRC8, ISC2, ISD2, ISR2, ISS2, WSC2                    |
 
 
 ## Thing configuration
@@ -121,7 +121,7 @@ When `invert` is `true` than `0` on Livisi is `UP` and `100` is `DOWN`.
 
 The SmartHome Controller (SHC) can be configured in the UI as follows:
 
-When adding the "Livisi SmartHome Controller" via the Inbox, you have to define the hostname or local IP address and the password for the local user.
+When adding the "LIVISI SmartHome Controller" via the Inbox, you have to define the hostname or local IP address and the password for the local user.
 Save your changes. The SHC should now login and go online.
 
 ### Discovering devices
@@ -133,7 +133,7 @@ Now you can add all devices from your Inbox as things.
 ### File based configuration
 
 As an alternative to the automatic discovery process and graphical configuration using the UI, Livisi things can be configured manually.
-The Livisi SmartHome Controller (SHC) can be configured using the following syntax:
+The LIVISI SmartHome Controller (SHC) can be configured using the following syntax:
 
 ```
 Bridge livisismarthome:bridge:<bridge-id> "Livisi: SmartHome Controller (SHC)" [ host="192.168.0.99", password="SomethingSecret", websocketidletimeout=900]
@@ -143,7 +143,7 @@ Bridge livisismarthome:bridge:<bridge-id> "Livisi: SmartHome Controller (SHC)" [
 The communication betweeen the binding and the SHC is not encrypted and can be traced.
 So be carefull and secure your local network from unauthorized access.
 
-All other Livisi devices can be added using the following syntax:
+All other LIVISI devices can be added using the following syntax:
 
 ```
 Thing WDS <thing-id> "<thing-name>" @ "<room-name>" [ id="<the-device-id>" ]
@@ -198,9 +198,9 @@ sitemap default label="Home" {
 }
 ```
 
-## Rules example for pushbuttons
+## Rules example for push-buttons
 
-Pushbuttons provide trigger channels, that can only be used in rules.
+Push-buttons provide trigger channels, that can only be used in rules.
 Here is an example rule:
 
 ```
