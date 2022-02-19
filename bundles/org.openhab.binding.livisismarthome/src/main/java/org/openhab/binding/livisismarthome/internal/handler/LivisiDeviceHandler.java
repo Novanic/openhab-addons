@@ -820,21 +820,13 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
                         // PushButtonSensor
                     } else if (capability.isTypePushButtonSensor()) {
                         // Some devices send both StateChanged and ButtonPressed. But only one should be handled.
-                        // If ButtonPressed is send lastPressedButtonIndex is not set in StateChanged so ignore
-                        // StateChanged.
-                        // type is also not always present if null will be interpreted as a normal key press.
-                        final Integer tmpButtonIndex = event.getProperties().getLastPressedButtonIndex();
-
-                        if (tmpButtonIndex != null) {
-                            capabilityState.setPushButtonSensorButtonIndexState(tmpButtonIndex);
-                            capabilityState
-                                    .setPushButtonSensorButtonIndexType(event.getProperties().getLastKeyPressType());
-
-                            final Integer tmpLastKeyPressCounter = event.getProperties().getLastKeyPressCounter();
-
-                            if (tmpLastKeyPressCounter != null) {
-                                capabilityState.setPushButtonSensorCounterState(tmpLastKeyPressCounter);
-                            }
+                        // LastPressedButtonIndex is not set in StateChanged so ignore StateChanged.
+                        final Integer buttonIndex = event.getProperties().getKeyPressButtonIndex();
+                        final boolean isButtonPressedEvent = buttonIndex != null;
+                        if (isButtonPressedEvent) {
+                            capabilityState.setPushButtonSensorButtonIndexState(buttonIndex);
+                            capabilityState.setPushButtonSensorButtonIndexType(event.getProperties().getKeyPressType());
+                            capabilityState.setPushButtonSensorCounterState(event.getProperties().getKeyPressCounter());
                             deviceChanged = true;
                         }
 

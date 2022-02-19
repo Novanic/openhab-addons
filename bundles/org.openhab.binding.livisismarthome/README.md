@@ -59,7 +59,7 @@ The bridge (SHC) can not be discovered automatically. It must be added manually 
 
 After the bridge is added, devices are discovered automatically.
 As there is no background discovery implemented at the moment, you have to start the discovery manually.
-However, only devices will appear that are added in the LIVISI SmartHome app before, as the LIVISI Binding does not support the coupling of devices to the bridge.
+However, only devices will appear that are added in the LIVISI SmartHome app before, because the LIVISI Binding does not support the coupling of devices to the bridge.
 
 ## Channels
 
