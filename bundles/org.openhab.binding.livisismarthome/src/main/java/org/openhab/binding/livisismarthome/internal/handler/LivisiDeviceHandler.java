@@ -586,17 +586,23 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
                             // prevent error when buttonIndexState is null
                             if (buttonIndexState != null) {
                                 if (buttonIndexState >= 0 && buttonIndexState <= 7) {
-                                    final int channelIndex = buttonIndexState + 1;
                                     final String type = c.getCapabilityState().getPushButtonSensorButtonIndexType();
-                                    final String triggerEvent = SHORT_PRESS.equals(type)
-                                            ? CommonTriggerEvents.SHORT_PRESSED
-                                            : (LONG_PRESS.equals(type) ? CommonTriggerEvents.LONG_PRESSED
-                                                    : CommonTriggerEvents.PRESSED);
-
-                                    triggerChannel(CHANNEL_BUTTON + channelIndex, triggerEvent);
-                                    updateState(String.format(CHANNEL_BUTTON_COUNT, channelIndex), pushCount);
+                                    if (type != null) {
+                                        final int channelIndex = buttonIndexState + 1;
+                                        if (SHORT_PRESS.equals(type)) {
+                                            triggerChannel(CHANNEL_BUTTON + channelIndex,
+                                                    CommonTriggerEvents.SHORT_PRESSED);
+                                        } else if (LONG_PRESS.equals(type)) {
+                                            triggerChannel(CHANNEL_BUTTON + channelIndex,
+                                                    CommonTriggerEvents.LONG_PRESSED);
+                                        }
+                                        triggerChannel(CHANNEL_BUTTON + channelIndex, CommonTriggerEvents.PRESSED);
+                                        updateState(String.format(CHANNEL_BUTTON_COUNT, channelIndex), pushCount);
+                                    } else {
+                                        logger.debug("Button type NULL not supported.");
+                                    }
                                 } else {
-                                    logger.debug("Button index {} not supported.", buttonIndexState);
+                                    logger.debug("Button index NULL not supported.");
                                 }
                                 // Button handled so remove state to avoid re-trigger.
                                 c.getCapabilityState().setPushButtonSensorButtonIndexState(null);
