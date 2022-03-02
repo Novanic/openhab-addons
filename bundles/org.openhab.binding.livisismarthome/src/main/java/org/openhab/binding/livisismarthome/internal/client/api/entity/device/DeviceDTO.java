@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.capability.CapabilityDTO;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.location.LocationDTO;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.message.MessageDTO;
@@ -334,6 +335,14 @@ public class DeviceDTO {
      */
     public boolean hasLocation() {
         return location != null;
+    }
+
+    public @NonNull String getLocationName() {
+        LocationDTO location = getLocation();
+        if (location != null && location.getName() != null) {
+            return location.getName();
+        }
+        return "<none>";
     }
 
     /**

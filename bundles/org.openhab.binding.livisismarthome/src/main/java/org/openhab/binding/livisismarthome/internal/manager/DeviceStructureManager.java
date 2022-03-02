@@ -204,10 +204,7 @@ public class DeviceStructureManager {
 
     private void logDeviceLoaded(DeviceDTO device) {
         if (logger.isDebugEnabled()) {
-            String location = device.getLocation().getName();
-            if (location == null) {
-                location = "<none>";
-            }
+            String location = device.getLocationName();
             logger.debug("Device {}:'{}@{}' by {} ({}) loaded.", device.getType(), device.getConfig().getName(),
                     location, device.getManufacturer(), device.getId());
             for (CapabilityDTO c : device.getCapabilityMap().values()) {
