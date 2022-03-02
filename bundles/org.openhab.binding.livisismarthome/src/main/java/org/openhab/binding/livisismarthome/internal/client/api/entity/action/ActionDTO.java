@@ -35,10 +35,9 @@ public class ActionDTO {
     private String target;
 
     /**
-     * The product (context) that should handle (execute) the action. Fixed to {@link ActionDTO#NAMESPACE_CORE_RWE}.
+     * The product (context) that should handle (execute) the action. Defaults to {@link ActionDTO#NAMESPACE_CORE_RWE}.
      */
-    @SuppressWarnings("unused")
-    private final String namespace = NAMESPACE_CORE_RWE;
+    private String namespace = NAMESPACE_CORE_RWE;
 
     /**
      * Dictionary of functions required for the intended execution of the action.
@@ -78,6 +77,20 @@ public class ActionDTO {
      */
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    /**
+     * @return the namespace
+     */
+    public String getNamespace() {
+        return namespace;
+    }
+
+    /**
+     * @param namespace the namespace to set
+     */
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 
     /**

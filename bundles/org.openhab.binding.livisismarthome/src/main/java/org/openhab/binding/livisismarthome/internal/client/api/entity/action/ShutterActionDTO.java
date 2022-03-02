@@ -24,6 +24,7 @@ public class ShutterActionDTO extends ActionDTO {
     private static final String DIRECTION_RAMP_UP = "RampUp";
     private static final String DIRECTION_RAMP_DOWN = "RampDown";
     private static final String CONSTANT = "Constant";
+    private static final String NAMESPACE_COSIP = "CosipDevices.RWE";
 
     /**
      * Describes a Shutteraction
@@ -33,6 +34,7 @@ public class ShutterActionDTO extends ActionDTO {
      */
     public ShutterActionDTO(String capabilityId, ShutterActionType action) {
         setTargetCapabilityById(capabilityId);
+        setNamespace(NAMESPACE_COSIP);
         final ActionParamsDTO params = new ActionParamsDTO();
 
         if (ShutterActionType.STOP.equals(action)) {
