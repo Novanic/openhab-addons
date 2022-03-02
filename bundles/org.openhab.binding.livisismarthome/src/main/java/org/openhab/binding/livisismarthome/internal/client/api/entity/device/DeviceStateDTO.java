@@ -23,8 +23,6 @@ import org.openhab.binding.livisismarthome.internal.client.api.entity.PropertyDT
  */
 public class DeviceStateDTO {
 
-    private static final String DEVICE_INCLUSION_STATE_INCLUDED = "Included";
-    private static final String DEVICE_INCLUSION_STATE_PENDING = "InclusionPending";
     private static final String DEVICE_UPDATE_STATE_UPTODATE = "UpToDate";
 
     private String id;
@@ -110,15 +108,6 @@ public class DeviceStateDTO {
     }
 
     /**
-     * Returns true, if the device is included.
-     *
-     * @return true, if the {@link DeviceDTO} is "Included"
-     */
-    public boolean deviceIsIncluded() {
-        return DEVICE_INCLUSION_STATE_INCLUDED.equals(getState().getDeviceInclusionState().getValue());
-    }
-
-    /**
      * @return the stateMap
      */
     public HashMap<String, PropertyDTO> getStateMap() {
@@ -130,15 +119,6 @@ public class DeviceStateDTO {
      */
     public void setStateMap(HashMap<String, PropertyDTO> stateMap) {
         this.stateMap = stateMap;
-    }
-
-    /**
-     * Returns true, if the device inclusion state is "InclusionPending".
-     *
-     * @return true, if the inclusion state is "InclusionPending"
-     */
-    public Boolean deviceInclusionIsPending() {
-        return DEVICE_INCLUSION_STATE_PENDING.equals(getDeviceInclusionState());
     }
 
     /**

@@ -581,13 +581,6 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
                 if (!reachable) {
                     updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR, "Device not reachable.");
                     return false;
-                } else if (DEVICE_VARIABLE_ACTUATOR.equals(device.getType())) {
-                    if (device.getDeviceState().deviceIsIncluded()) {
-                        updateStatus(ThingStatus.ONLINE);
-                    } else {
-                        updateStatus(ThingStatus.ONLINE, ThingStatusDetail.CONFIGURATION_PENDING,
-                                "State is " + device.getDeviceState().getDeviceInclusionState());
-                    }
                 }
             }
         }

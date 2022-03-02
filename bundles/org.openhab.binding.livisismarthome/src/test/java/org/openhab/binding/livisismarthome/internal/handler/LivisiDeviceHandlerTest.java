@@ -34,7 +34,6 @@ import org.openhab.binding.livisismarthome.internal.client.api.entity.device.Dev
 import org.openhab.binding.livisismarthome.internal.client.api.entity.device.DeviceStateDTO;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.event.EventDTO;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.event.EventPropertiesDTO;
-import org.openhab.binding.livisismarthome.internal.client.api.entity.state.StringStateDTO;
 import org.openhab.core.config.core.Configuration;
 import org.openhab.core.library.types.DecimalType;
 import org.openhab.core.library.types.OnOffType;
@@ -108,15 +107,10 @@ public class LivisiDeviceHandlerTest {
         assertEquals(ThingStatusDetail.COMMUNICATION_ERROR, deviceHandler.getThing().getStatusInfo().getStatusDetail());
     }
 
-    // TODO is this special VariableActuator handling really required?
     @Test
-    public void testOnDeviceStateChanged_IsReachable_VariableActuator_Included() {
+    public void testOnDeviceStateChanged_IsReachable_VariableActuator() {
         DeviceStateDTO deviceState = new DeviceStateDTO();
         deviceState.setReachable(true);
-
-        StringStateDTO includedState = new StringStateDTO();
-        includedState.setValue("Included");
-        deviceState.getState().setDeviceInclusionState(includedState);
 
         DeviceDTO device = createDevice();
         device.setType(DEVICE_VARIABLE_ACTUATOR);
@@ -127,24 +121,6 @@ public class LivisiDeviceHandlerTest {
         deviceHandler.onDeviceStateChanged(device);
         assertEquals(ThingStatus.ONLINE, deviceHandler.getThing().getStatus());
         assertEquals(ThingStatusDetail.NONE, deviceHandler.getThing().getStatusInfo().getStatusDetail());
-    }
-
-    // TODO is this special VariableActuator handling really required?
-    @Test
-    public void testOnDeviceStateChanged_IsReachable_VariableActuator_ConfigurationPending() {
-        DeviceStateDTO deviceState = new DeviceStateDTO();
-        deviceState.setReachable(true);
-
-        DeviceDTO device = createDevice();
-        device.setType(DEVICE_VARIABLE_ACTUATOR);
-        device.setDeviceState(deviceState);
-
-        LivisiDeviceHandler deviceHandler = createDeviceHandler(device);
-
-        deviceHandler.onDeviceStateChanged(device);
-        assertEquals(ThingStatus.ONLINE, deviceHandler.getThing().getStatus());
-        assertEquals(ThingStatusDetail.CONFIGURATION_PENDING,
-                deviceHandler.getThing().getStatusInfo().getStatusDetail());
     }
 
     @Test
