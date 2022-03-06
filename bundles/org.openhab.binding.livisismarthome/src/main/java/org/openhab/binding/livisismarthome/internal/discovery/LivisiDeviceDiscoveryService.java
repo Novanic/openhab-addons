@@ -12,8 +12,6 @@
  */
 package org.openhab.binding.livisismarthome.internal.discovery;
 
-import java.util.*;
-
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.livisismarthome.internal.LivisiBindingConstants;
@@ -29,6 +27,12 @@ import org.openhab.core.thing.binding.ThingHandler;
 import org.openhab.core.thing.binding.ThingHandlerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * The {@link LivisiDeviceDiscoveryService} is responsible for discovering new devices.
