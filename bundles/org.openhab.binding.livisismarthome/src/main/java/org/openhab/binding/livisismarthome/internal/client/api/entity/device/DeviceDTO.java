@@ -272,7 +272,7 @@ public class DeviceDTO {
      * @return the capabilityMap
      */
     public Map<String, CapabilityDTO> getCapabilityMap() {
-        if(capabilityMap != null) {
+        if (capabilityMap != null) {
             return capabilityMap;
         }
         return Collections.emptyMap();
@@ -353,7 +353,7 @@ public class DeviceDTO {
      * @return the messageList
      */
     public List<MessageDTO> getMessageList() {
-        if(messageList != null) {
+        if (messageList != null) {
             return messageList;
         }
         return Collections.emptyList();
