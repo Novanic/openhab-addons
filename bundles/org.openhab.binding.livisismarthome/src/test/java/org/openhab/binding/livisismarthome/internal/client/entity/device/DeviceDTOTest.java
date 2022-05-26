@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.junit.jupiter.api.Test;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.device.DeviceDTO;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.device.DeviceStateDTO;
@@ -28,6 +29,7 @@ import org.openhab.binding.livisismarthome.internal.client.api.entity.state.Bool
 /**
  * @author Sven Strohschein - Initial contribution
  */
+@NonNullByDefault
 public class DeviceDTOTest {
 
     @Test
