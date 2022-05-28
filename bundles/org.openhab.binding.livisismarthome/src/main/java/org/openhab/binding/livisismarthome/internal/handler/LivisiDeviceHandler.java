@@ -20,8 +20,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import javax.measure.quantity.Temperature;
-
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.action.ShutterActionType;
@@ -172,21 +170,22 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
 
     private void commandUpdatePointTemperature(Command command, LivisiBridgeHandler bridgeHandler) {
         if (command instanceof QuantityType) {
-            final QuantityType<Temperature> pointTemperatureCommand = ((QuantityType<Temperature>) command)
-                    .toUnit(SIUnits.CELSIUS);
-            double pointTemperature = pointTemperatureCommand.doubleValue();
-            if (pointTemperatureCommand.doubleValue() < MIN_TEMPERATURE_CELSIUS) {
-                pointTemperature = MIN_TEMPERATURE_CELSIUS;
-                logger.debug(
-                        "pointTemperature set to value {} (instead of value '{}'), because it is the minimal possible value!",
-                        MIN_TEMPERATURE_CELSIUS, pointTemperatureCommand.doubleValue());
-            } else if (pointTemperatureCommand.doubleValue() > MAX_TEMPERATURE_CELSIUS) {
-                pointTemperature = MAX_TEMPERATURE_CELSIUS;
-                logger.debug(
-                        "pointTemperature set to value {} (instead of value '{}'), because it is the maximal possible value!",
-                        MAX_TEMPERATURE_CELSIUS, pointTemperatureCommand.doubleValue());
+            final QuantityType<?> pointTemperatureCommand = ((QuantityType<?>) command).toUnit(SIUnits.CELSIUS);
+            if (pointTemperatureCommand != null) {
+                double pointTemperature = pointTemperatureCommand.doubleValue();
+                if (pointTemperature < MIN_TEMPERATURE_CELSIUS) {
+                    pointTemperature = MIN_TEMPERATURE_CELSIUS;
+                    logger.debug(
+                            "pointTemperature set to value {} (instead of value '{}'), because it is the minimal possible value!",
+                            MIN_TEMPERATURE_CELSIUS, pointTemperatureCommand.doubleValue());
+                } else if (pointTemperature > MAX_TEMPERATURE_CELSIUS) {
+                    pointTemperature = MAX_TEMPERATURE_CELSIUS;
+                    logger.debug(
+                            "pointTemperature set to value {} (instead of value '{}'), because it is the maximal possible value!",
+                            MAX_TEMPERATURE_CELSIUS, pointTemperatureCommand.doubleValue());
+                }
+                bridgeHandler.commandUpdatePointTemperature(deviceId, pointTemperature);
             }
-            bridgeHandler.commandUpdatePointTemperature(deviceId, pointTemperature);
         }
     }
 
