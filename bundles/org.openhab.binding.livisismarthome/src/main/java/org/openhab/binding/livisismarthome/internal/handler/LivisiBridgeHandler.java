@@ -38,7 +38,6 @@ import org.openhab.binding.livisismarthome.internal.LivisiBindingConstants;
 import org.openhab.binding.livisismarthome.internal.LivisiWebSocket;
 import org.openhab.binding.livisismarthome.internal.client.GsonOptional;
 import org.openhab.binding.livisismarthome.internal.client.LivisiClient;
-import org.openhab.binding.livisismarthome.internal.client.URLConnectionFactory;
 import org.openhab.binding.livisismarthome.internal.client.URLCreator;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.action.ShutterActionType;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.capability.CapabilityDTO;
@@ -882,7 +881,7 @@ public class LivisiBridgeHandler extends BaseBridgeHandler
     }
 
     LivisiClient createClient(final OAuthClientService oAuthService) {
-        return new LivisiClient(bridgeConfiguration, oAuthService, new URLConnectionFactory());
+        return new LivisiClient(bridgeConfiguration, oAuthService, httpClient);
     }
 
     /**
