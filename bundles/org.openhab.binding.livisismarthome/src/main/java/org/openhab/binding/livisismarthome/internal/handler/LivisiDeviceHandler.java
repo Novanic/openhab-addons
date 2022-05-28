@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import javax.measure.quantity.Temperature;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.livisismarthome.internal.client.api.entity.action.ShutterActionType;
@@ -170,7 +172,8 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
 
     private void commandUpdatePointTemperature(Command command, LivisiBridgeHandler bridgeHandler) {
         if (command instanceof QuantityType) {
-            final QuantityType<?> pointTemperatureCommand = (QuantityType<?>) command;
+            final QuantityType<Temperature> pointTemperatureCommand = ((QuantityType<Temperature>) command)
+                    .toUnit(SIUnits.CELSIUS);
             double pointTemperature = pointTemperatureCommand.doubleValue();
             if (pointTemperatureCommand.doubleValue() < MIN_TEMPERATURE_CELSIUS) {
                 pointTemperature = MIN_TEMPERATURE_CELSIUS;
