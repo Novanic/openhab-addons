@@ -81,7 +81,7 @@ public class NetatmoConstants {
         INSIDE_TEMPERATURE(0, 50, 0.3, SIUnits.CELSIUS, "temp", "measure", true),
         OUTSIDE_TEMPERATURE(-40, 65, 0.3, SIUnits.CELSIUS, "temp", "measure", true),
         HEAT_INDEX(-40, 65, 1, SIUnits.CELSIUS, "", "", false),
-        PRESSURE(260, 1260, 1, HECTO(SIUnits.PASCAL), "pressure", "measure", true),
+        PRESSURE(260, 1260, 0.1, HECTO(SIUnits.PASCAL), "pressure", "measure", true),
         CO2(0, 5000, 50, Units.PARTS_PER_MILLION, "co2", "measure", true),
         NOISE(35, 120, 1, Units.DECIBEL, "noise", "measure", true),
         RAIN_QUANTITY(0, 150, 0.1, MILLI(SIUnits.METRE), "sum_rain", "sum_rain", false),
@@ -107,8 +107,8 @@ public class NetatmoConstants {
                         new MeasureChannelDetails(confFragment, String.join(":", NUMBER, dimension),
                                 String.format("%%.%df %s", measureDefinition.scale, UnitUtils.UNIT_PLACEHOLDER)));
                 if (canScale) {
-                    channels.put(String.join("-", apiDescriptor, GROUP_TIMESTAMP),
-                            new MeasureChannelDetails(GROUP_TIMESTAMP, DATETIME, "%1$tA, %1$td.%1$tm. %1$tH:%1$tM"));
+                    channels.put(String.join("-", apiDescriptor, GROUP_TIMESTAMP), new MeasureChannelDetails(
+                            GROUP_TIMESTAMP, DATETIME, "@text/extensible-channel-type.timestamp.pattern"));
                 }
             }
         }
