@@ -186,9 +186,10 @@ public class DeconzBridgeHandler extends BaseBridgeHandler implements WebSocketC
                 return v;
             } else if (t instanceof SocketTimeoutException || t instanceof TimeoutException
                     || t instanceof CompletionException) {
-                logger.debug("Get full state failed", t);
+                logger.warn("Get full state failed", t);
             } else {
                 updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR, t.getMessage());
+                logger.warn("COMMUNICATION_ERROR in refreshFullStateCache");
             }
             return Optional.empty();
         });
@@ -255,6 +256,8 @@ public class DeconzBridgeHandler extends BaseBridgeHandler implements WebSocketC
      */
     private void startWebsocket() {
         if (websocket.isConnected() || websocketPort == 0 || thingDisposing) {
+            logger.warn("Web socket not started, isConnected: {}, websocketPort: {}, disposing: {}",
+                    websocket.isConnected(), websocketPort, thingDisposing);
             return;
         }
 
@@ -308,6 +311,7 @@ public class DeconzBridgeHandler extends BaseBridgeHandler implements WebSocketC
     @Override
     public void connectionLost(String reason) {
         updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR, reason);
+        logger.warn("connectionLost handling, reason: {}", reason);
 
         stopTimer();
         // Wait for POLL_FREQUENCY_SEC after a connection was closed before trying again

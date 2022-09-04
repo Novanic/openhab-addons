@@ -160,7 +160,7 @@ public class WebSocketConnection {
     @OnWebSocketError
     public void onError(@Nullable Session session, Throwable cause) {
         if (session == null) {
-            logger.trace("Encountered an error while processing on error without session. Connection state is {}: {}",
+            logger.warn("Encountered an error while processing on error without session. Connection state is {}: {}",
                     connectionState, cause.getMessage());
             return;
         }
@@ -183,7 +183,7 @@ public class WebSocketConnection {
             handleWrongSession(session, "Connection closed: " + statusCode + " / " + reason);
             return;
         }
-        logger.trace("{} closed connection: {} / {}", socketName, statusCode, reason);
+        logger.warn("{} closed connection: {} / {}", socketName, statusCode, reason);
         connectionState = ConnectionState.DISCONNECTED;
         this.session = null;
         connectionListener.connectionLost(reason);
