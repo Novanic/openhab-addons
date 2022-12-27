@@ -89,6 +89,8 @@ public class TeslaBindingConstants {
     public static final ThingTypeUID THING_TYPE_MODELX = new ThingTypeUID(BINDING_ID, "modelx");
     public static final ThingTypeUID THING_TYPE_MODELY = new ThingTypeUID(BINDING_ID, "modely");
 
+    public static final ThingTypeUID THING_TYPE_WALL_CONNECTOR = new ThingTypeUID(BINDING_ID, "wallconnector");
+
     public enum EventKeys {
         timestamp,
         odometer,
@@ -116,4 +118,5 @@ public class TeslaBindingConstants {
     public static final String CONFIG_INACTIVITY = "inactivity";
     public static final String CONFIG_USEDRIVESTATE = "useDriveState";
     public static final String CONFIG_USEDADVANCEDSTATES = "useAdvancedStatesForPolling";
+    public static final String CONFIG_IP_ADDRESS = "ipAddress";
 }
