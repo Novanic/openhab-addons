@@ -16,6 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,9 +70,9 @@ public class TeslaWallConnectorHandlerTest {
     @Test
     public void testInitialize_NULL() throws Exception {
         ContentResponse responseMock = mock(ContentResponse.class);
-        when(responseMock.getContentAsString()).thenReturn("");
+        when(responseMock.getContentAsString()).thenReturn(null);
 
-        when(httpClientMock.GET(anyString())).thenReturn(null);
+        when(httpClientMock.GET(anyString())).thenReturn(responseMock);
 
         handler.initialize();
 
@@ -91,7 +92,7 @@ public class TeslaWallConnectorHandlerTest {
         verify(thingMock).setProperty("firmware_version", "22.41.2+gdb42x98x0xxxxx");
     }
 
-    private class TeslaWallConnectorHandlerAccessible extends TeslaWallConnectorHandler {
+    private static class TeslaWallConnectorHandlerAccessible extends TeslaWallConnectorHandler {
 
         private final ScheduledExecutorService schedulerMock;
 
