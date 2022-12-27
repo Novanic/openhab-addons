@@ -673,6 +673,12 @@
 		<label>Wake Up</label>
 		<description>Wake up the vehicle from a (deep) sleep</description>
 	</channel-type>
+	<channel-type id="connectortotalpower">
+		<item-type>Number</item-type>
+		<label>Total Power</label>
+		<description>Overall total power which was delivered via the connector</description>
+		<state pattern="%.1f kW" readOnly="true"/>
+	</channel-type>
 	<channel-type id="wiperbladeheater" advanced="true">
 		<item-type>Switch</item-type>
 		<label>Wiperblade Heater</label>
