@@ -16,19 +16,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
+import java.util.concurrent.ScheduledExecutorService;
+
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.openhab.core.common.ThreadPoolManager;
 import org.openhab.core.config.core.Configuration;
 import org.openhab.core.io.net.http.HttpClientFactory;
 import org.openhab.core.thing.Thing;
-
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * @author Sven Strohschein - Initial contribution
@@ -82,7 +79,8 @@ public class TeslaWallConnectorHandlerTest {
     @Test
     public void testInitialize() throws Exception {
         ContentResponse responseMock = mock(ContentResponse.class);
-        when(responseMock.getContentAsString()).thenReturn("{\"firmware_version\":\"22.41.2+gdb42x98x0xxxxx\",\"part_number\":\"1529400-02-D\",\"serial_number\":\"PGT21309042000\"}");
+        when(responseMock.getContentAsString()).thenReturn(
+                "{\"firmware_version\":\"22.41.2+gdb42x98x0xxxxx\",\"part_number\":\"1529400-02-D\",\"serial_number\":\"PGT21309042000\"}");
 
         when(httpClientMock.GET(anyString())).thenReturn(responseMock);
 
@@ -100,7 +98,7 @@ public class TeslaWallConnectorHandlerTest {
             super(thing, httpClientFactory);
             schedulerMock = mock(ScheduledExecutorService.class);
             doAnswer((Answer<Void>) invocationOnMock -> {
-                ((Runnable)invocationOnMock.getArgument(0)).run();
+                ((Runnable) invocationOnMock.getArgument(0)).run();
                 return null;
             }).when(schedulerMock).execute(any());
         }
