@@ -14,6 +14,7 @@ package org.openhab.binding.tesla.internal.handler;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -38,6 +39,7 @@ import com.google.gson.Gson;
 @NonNullByDefault
 public class TeslaWallConnectorHandler extends BaseThingHandler {
 
+    private static final String PROTOCOL = "http://";
     private static final String VERSION_URL = "/api/1/version";
 
     private final HttpClient httpClient;
@@ -52,12 +54,12 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
     @Override
     public void initialize() {
         final String wallConnectorIPAddress = (String) getConfig().get(TeslaBindingConstants.CONFIG_IP_ADDRESS);
-        getScheduler().execute(() -> initializeProperties(wallConnectorIPAddress));
+        getScheduler().scheduleWithFixedDelay(() -> initializeProperties(wallConnectorIPAddress), 0, 1, TimeUnit.HOURS);
     }
 
     private void initializeProperties(String wallConnectorIPAddress) {
         try {
-            ContentResponse response = httpClient.GET(wallConnectorIPAddress + VERSION_URL);
+            ContentResponse response = httpClient.GET(PROTOCOL + wallConnectorIPAddress + VERSION_URL);
             String content = response.getContentAsString();
             @Nullable
             VersionDTO versionObject = gson.fromJson(content, VersionDTO.class);
