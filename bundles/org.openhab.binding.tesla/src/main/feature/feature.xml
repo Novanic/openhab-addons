@@ -4,10 +4,6 @@
 
 	<feature name="openhab-binding-tesla" description="Tesla Binding" version="${project.version}">
 		<feature>openhab-runtime-base</feature>
-		<!-- TODO only required when TeslaUpnpDiscoveryParticipant is still required -->
-		<feature>openhab-transport-upnp</feature>
-		<!-- TODO only required when TeslaMDNSDiscoveryParticipant is still required -->
-		<feature>openhab-transport-mdns</feature>
 		<bundle dependency="true">mvn:org.jsoup/jsoup/1.14.3</bundle>
 		<bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.tesla/${project.version}</bundle>
 	</feature>
