@@ -17,6 +17,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
@@ -100,7 +101,7 @@ public class TeslaWallConnectorHandlerTest {
             doAnswer((Answer<Void>) invocationOnMock -> {
                 ((Runnable) invocationOnMock.getArgument(0)).run();
                 return null;
-            }).when(schedulerMock).execute(any());
+            }).when(schedulerMock).scheduleWithFixedDelay(any(), eq(0L), eq(1L), eq(TimeUnit.HOURS));
         }
 
         @Override
