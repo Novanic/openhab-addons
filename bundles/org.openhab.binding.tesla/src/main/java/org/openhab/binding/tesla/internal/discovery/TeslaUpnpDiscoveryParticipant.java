@@ -12,6 +12,8 @@
  */
 package org.openhab.binding.tesla.internal.discovery;
 
+import static org.openhab.binding.tesla.internal.TeslaBindingConstants.THING_TYPE_WALL_CONNECTOR;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -35,8 +37,7 @@ public class TeslaUpnpDiscoveryParticipant implements UpnpDiscoveryParticipant {
 
     @Override
     public Set<ThingTypeUID> getSupportedThingTypeUIDs() {
-        // TODO
-        return Collections.emptySet();
+        return Collections.singleton(THING_TYPE_WALL_CONNECTOR);
     }
 
     @Override

@@ -12,6 +12,8 @@
  */
 package org.openhab.binding.tesla.internal.discovery;
 
+import static org.openhab.binding.tesla.internal.TeslaBindingConstants.THING_TYPE_WALL_CONNECTOR;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -34,12 +36,11 @@ import org.osgi.service.component.annotations.Component;
 @Component(service = MDNSDiscoveryParticipant.class, configurationPid = "discovery.mdns.tesla")
 public class TeslaMDNSDiscoveryParticipant implements MDNSDiscoveryParticipant {
 
-    private static final String SERVICE_TYPE = "_tesla._tcp.local.";
+    private static final String SERVICE_TYPE = "_tcp.local.";
 
     @Override
     public Set<ThingTypeUID> getSupportedThingTypeUIDs() {
-        // TODO
-        return Collections.emptySet();
+        return Collections.singleton(THING_TYPE_WALL_CONNECTOR);
     }
 
     @Override
