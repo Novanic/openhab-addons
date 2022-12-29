@@ -15,22 +15,28 @@ package org.openhab.binding.tesla.internal.protocol.wallconnector;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * The {@link VersionDTO} holds data of the version endpoint.
+ * The {@link VitalsDTO} holds data of the vitals endpoint.
  *
  * @author Sven Strohschein - Initial contribution
  */
-public class VersionDTO {
+public class VitalsDTO {
 
-    @SerializedName("firmware_version")
-    private String firmwareVersion;
-    @SerializedName("serial_number")
-    private String serialNumber;
+    @SerializedName("vehicle_connected")
+    private boolean isVehicleConnected;
+    @SerializedName("session_s")
+    private long sessionDurationInSeconds;
+    @SerializedName("session_energy_wh")
+    private float sessionEnergyWh;
 
-    public String getFirmwareVersion() {
-        return firmwareVersion;
+    public boolean isVehicleConnected() {
+        return isVehicleConnected;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public long getSessionDurationInSeconds() {
+        return sessionDurationInSeconds;
+    }
+
+    public float getSessionEnergyWh() {
+        return sessionEnergyWh;
     }
 }
