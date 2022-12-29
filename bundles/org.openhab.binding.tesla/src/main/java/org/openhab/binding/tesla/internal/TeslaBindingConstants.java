@@ -109,6 +109,9 @@ public class TeslaBindingConstants {
 
     public static final String CHANNEL_CHARGE = "charge";
     public static final String CHANNEL_COMBINED_TEMP = "combinedtemp";
+    public static final String CHANNEL_CONNECTOR_CONTACTOR_VEHICLE_CONNECTED = "vehicleconnected";
+    public static final String CHANNEL_CONNECTOR_SESSION_DURATION = "sessionduration";
+    public static final String CHANNEL_CONNECTOR_SESSION_ENERGY = "sessionenergy";
 
     // thing configurations
     public static final String CONFIG_ALLOWWAKEUP = "allowWakeup";
@@ -118,5 +121,5 @@ public class TeslaBindingConstants {
     public static final String CONFIG_INACTIVITY = "inactivity";
     public static final String CONFIG_USEDRIVESTATE = "useDriveState";
     public static final String CONFIG_USEDADVANCEDSTATES = "useAdvancedStatesForPolling";
-    public static final String CONFIG_IP_ADDRESS = "ipAddress";
+    public static final String CONFIG_CONNECTOR_HOST = "host";
 }

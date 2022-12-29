@@ -14,13 +14,15 @@
 		<description>A Wall Connector</description>
 
 		<channels>
-			<channel id="totalpower" typeId="connectortotalpower"/>
+			<channel id="vehicleconnected" typeId="connectorvehicleconnected"/>
+			<channel id="sessionduration" typeId="connectorsessionduration"/>
+			<channel id="sessionenergy" typeId="connectorsessionenergy"/>
 		</channels>
 
 		<config-description>
-			<parameter name="ipAddress" type="text" required="true">
-				<label>IP Address</label>
-				<description>IP Address of the wall connector</description>
+			<parameter name="host" type="text" required="true">
+				<label>Host</label>
+				<description>Host name or local IP address of the wall connector</description>
 			</parameter>
 		</config-description>
 
