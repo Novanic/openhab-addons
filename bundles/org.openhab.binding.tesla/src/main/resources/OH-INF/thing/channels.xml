@@ -696,6 +696,6 @@
 		<label>Session Energy</label>
 		<description>Energy which was delivered via the connector during the current session (in kWh)</description>
 		<category>Energy</category>
-		<state pattern="%.1f kW" readOnly="true"/>
+		<state readOnly="true"/>
 	</channel-type>
 </thing:thing-descriptions>
