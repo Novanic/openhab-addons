@@ -8,13 +8,14 @@ The integration happens through the Tesla Owners Remote API.
 All current Tesla models are supported by this binding.
 Access is established through a Tesla account as a bridge.
 
-| Thing Type | Description                                  |
-|------------|----------------------------------------------|
-| account    | The account provides access to the vehicles. |
-| models     | A Tesla Model S                              |
-| model3     | A Tesla Model 3                              |
-| modelx     | A Tesla Model X                              |
-| modely     | A Tesla Model Y                              |
+| Thing Type    | Description                                  |
+|---------------|----------------------------------------------|
+| account       | The account provides access to the vehicles. |
+| models        | A Tesla Model S                              |
+| model3        | A Tesla Model 3                              |
+| modelx        | A Tesla Model X                              |
+| modely        | A Tesla Model Y                              |
+| wallconnector | A Tesla Wall Connector                       |
 
 ![Tesla](doc/tesla.jpg)
 
@@ -40,6 +41,8 @@ Please note that we in general consider it dangerous to enter your credentials i
 - [Tesla Tokens (Android)](https://play.google.com/store/apps/details?id=net.leveugle.teslatokens)
 
 When using one of such apps, simply copy and paste the received refresh token into the account configuration.
+
+The wall connector doesn't require a bridge or account because the communication with the wall connector is working via the local network via HTTP. The Thing has to get created manually and the local host name or IP address is required as a Thing configuration parameter.
 
 ## Thing Configuration Parameters
 
@@ -68,6 +71,9 @@ This setting is not recommended as it will result in a significant vampire drain
 `enableEvents` captures and processes data in near real-time for key variables by enabling events streamed by the Tesla back-end system.
 
 `inactivity` setting is ignored and will always be five minutes if homelink is available (car is at home)
+
+The wall connector Thing requires the local host name or IP address as a configuration parameter `host`.
+
 
 ## Channels
 
@@ -192,6 +198,15 @@ Additionally, these advanced channels are available (not all are available on al
 | wakeup                    | Switch                   | Wake Up                       | Wake up the vehicle from a (deep) sleep                                                                          |
 | wiperbladeheater          | Switch                   | Wiperblade Heater             | Indicates if the wiperblade heater is switched on                                                                |
 
+The wall connector supports these channels:
+
+| Channel ID       | Item Type     | Label             | Description                                                                      |
+|------------------|---------------|-------------------|----------------------------------------------------------------------------------|
+| vehicleconnected | Switch        | Vehicle Connected | True when a vehicle is connected, otherwise false                                |
+| sessionduration  | Number:Time   | Session Duration  | Duration of the current session (in seconds)                                     |
+| sessionenergy    | Number:Energy | Session Energy    | Energy which was delivered via the connector during the current session (in kWh) |
+
+
 ## Example
 
 demo.Things:
@@ -200,6 +215,8 @@ demo.Things:
 Bridge tesla:account:myaccount "My Tesla Account" [ refreshToken="xxxx" ] {
     model3 mycar "My favorite car" [ vin="5YJSA7H25FFP53736"]
 }
+
+Thing tesla:wallconnector:mywallconnector "My Tesla Wall Connector" [ host="192.168.178.60" ]
 ```
 
 demo.items:
