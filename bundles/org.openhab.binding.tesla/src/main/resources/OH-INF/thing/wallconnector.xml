@@ -6,8 +6,8 @@
 
 	<thing-type id="wallconnector">
 
-		<label>Wall Connector</label>
-		<description>A Wall Connector</description>
+		<label>Tesla Wall Connector</label>
+		<description>A Tesla Wall Connector</description>
 
 		<channels>
 			<channel id="vehicleconnected" typeId="connectorvehicleconnected"/>
