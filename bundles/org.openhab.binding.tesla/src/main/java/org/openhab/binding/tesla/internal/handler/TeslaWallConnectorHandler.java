@@ -100,9 +100,12 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
             updateState(CHANNEL_CONNECTOR_SESSION_DURATION,
                     QuantityType.valueOf((double) vitals.getSessionDurationInSeconds(), Units.SECOND));
 
-            BigDecimal sessionEnergyKWh = BigDecimal.valueOf(vitals.getSessionEnergyWh())
-                    .divide(BigDecimal.valueOf(1000), RoundingMode.HALF_UP);
-            updateState(CHANNEL_CONNECTOR_SESSION_ENERGY, new QuantityType<>(sessionEnergyKWh, Units.KILOWATT_HOUR));
+            BigDecimal sessionEnergyKWh = BigDecimal.valueOf(vitals.getSessionEnergyWh());
+            sessionEnergyKWh = sessionEnergyKWh.setScale(3, RoundingMode.HALF_UP);
+            sessionEnergyKWh = sessionEnergyKWh.divide(BigDecimal.valueOf(1000), RoundingMode.HALF_UP);
+
+            updateState(CHANNEL_CONNECTOR_SESSION_ENERGY,
+                    QuantityType.valueOf(sessionEnergyKWh.doubleValue(), Units.KILOWATT_HOUR));
 
             updateStatus(ThingStatus.ONLINE);
         } else {
