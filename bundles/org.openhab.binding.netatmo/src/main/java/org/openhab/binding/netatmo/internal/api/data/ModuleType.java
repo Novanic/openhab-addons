@@ -38,7 +38,24 @@ import org.openhab.binding.netatmo.internal.handler.capability.PresenceCapabilit
 import org.openhab.binding.netatmo.internal.handler.capability.RoomCapability;
 import org.openhab.binding.netatmo.internal.handler.capability.SmokeCapability;
 import org.openhab.binding.netatmo.internal.handler.capability.WeatherCapability;
-import org.openhab.binding.netatmo.internal.handler.channelhelper.*;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.AirQualityChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.ApiBridgeChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.CameraChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.DoorTagChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.EnergyChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.EventCameraChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.EventChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.EventPersonChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.PersonChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.PresenceChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.PressureChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.RainChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.RoomChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.SecurityChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.SetpointChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.SirenChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.Therm1ChannelHelper;
+import org.openhab.binding.netatmo.internal.handler.channelhelper.WindChannelHelper;
 import org.openhab.core.thing.ThingTypeUID;
 
 /**
