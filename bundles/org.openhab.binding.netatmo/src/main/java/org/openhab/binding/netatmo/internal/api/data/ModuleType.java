@@ -73,13 +73,14 @@ public enum ModuleType {
     PRESENCE(FeatureArea.SECURITY, "NOC", HOME, Set.of(PresenceCapability.class, ChannelHelperCapability.class),
             ChannelGroup.SIGNAL, ChannelGroup.EVENT,
             new ChannelGroup(PresenceChannelHelper.class, GROUP_SECURITY_EVENT, GROUP_CAM_STATUS, GROUP_CAM_LIVE,
-                    GROUP_PRESENCE)),
+                    GROUP_PRESENCE),
+            new ChannelGroup(EventCameraChannelHelper.class, GROUP_SUB_EVENT)),
 
     DOORBELL(FeatureArea.SECURITY, "NDB", HOME, Set.of(DoorbellCapability.class, ChannelHelperCapability.class),
             ChannelGroup.SIGNAL,
             new ChannelGroup(CameraChannelHelper.class, GROUP_SECURITY_EVENT, GROUP_DOORBELL_STATUS,
                     GROUP_DOORBELL_LIVE),
-            new ChannelGroup(EventDoorbellChannelHelper.class, GROUP_DOORBELL_LAST_EVENT, GROUP_DOORBELL_SUB_EVENT)),
+            new ChannelGroup(EventCameraChannelHelper.class, GROUP_DOORBELL_LAST_EVENT, GROUP_DOORBELL_SUB_EVENT)),
 
     WEATHER_STATION(FeatureArea.WEATHER, "NAMain", ACCOUNT,
             Set.of(DeviceCapability.class, WeatherCapability.class, MeasureCapability.class,
