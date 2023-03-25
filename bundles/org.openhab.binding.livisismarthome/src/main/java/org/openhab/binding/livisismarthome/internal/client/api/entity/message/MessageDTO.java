@@ -27,8 +27,8 @@ import com.google.gson.annotations.SerializedName;
 public class MessageDTO {
 
     /** device related messages */
-    public static final String TYPE_DEVICE_UNREACHABLE = "DeviceUnreachable";
-    public static final String TYPE_DEVICE_LOW_BATTERY = "DeviceLowBattery";
+    private static final String TYPE_DEVICE_UNREACHABLE = "DeviceUnreachable";
+    private static final String TYPE_DEVICE_LOW_BATTERY = "DeviceLowBattery";
 
     /**
      * Identifier of the message – must be unique.

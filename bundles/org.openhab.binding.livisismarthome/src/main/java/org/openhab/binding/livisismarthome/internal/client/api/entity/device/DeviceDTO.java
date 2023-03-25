@@ -372,13 +372,10 @@ public class DeviceDTO {
             boolean isUnreachableMessageFound = false;
             boolean isLowBatteryMessageFound = false;
             for (final MessageDTO message : messageList) {
-                switch (message.getType()) {
-                    case MessageDTO.TYPE_DEVICE_UNREACHABLE:
-                        isUnreachableMessageFound = true;
-                        break;
-                    case MessageDTO.TYPE_DEVICE_LOW_BATTERY:
-                        isLowBatteryMessageFound = true;
-                        break;
+                if (message.isTypeDeviceUnreachable()) {
+                    isUnreachableMessageFound = true;
+                } else if (message.isTypeDeviceLowBattery()) {
+                    isLowBatteryMessageFound = true;
                 }
             }
             if (isUnreachableMessageFound) {

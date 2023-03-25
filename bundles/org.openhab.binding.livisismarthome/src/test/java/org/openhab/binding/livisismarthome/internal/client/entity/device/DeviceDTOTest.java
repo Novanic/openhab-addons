@@ -32,6 +32,9 @@ import org.openhab.binding.livisismarthome.internal.client.api.entity.state.Bool
 @NonNullByDefault
 public class DeviceDTOTest {
 
+    private static final String TYPE_DEVICE_UNREACHABLE = "DeviceUnreachable";
+    private static final String TYPE_DEVICE_LOW_BATTERY = "DeviceLowBattery";
+
     @Test
     public void testSetMessageListLowBatteryMessage() {
         DeviceDTO device = createDevice();
@@ -39,7 +42,7 @@ public class DeviceDTOTest {
         assertTrue(device.isReachable());
         assertFalse(device.hasLowBattery());
 
-        device.setMessageList(Collections.singletonList(createMessage(MessageDTO.TYPE_DEVICE_LOW_BATTERY)));
+        device.setMessageList(Collections.singletonList(createMessage(TYPE_DEVICE_LOW_BATTERY)));
 
         assertTrue(device.isReachable());
         assertTrue(device.hasLowBattery());
@@ -52,7 +55,7 @@ public class DeviceDTOTest {
         assertTrue(device.isReachable());
         assertFalse(device.hasLowBattery());
 
-        device.setMessageList(Collections.singletonList(createMessage(MessageDTO.TYPE_DEVICE_UNREACHABLE)));
+        device.setMessageList(Collections.singletonList(createMessage(TYPE_DEVICE_UNREACHABLE)));
 
         assertFalse(device.isReachable());
         assertFalse(device.hasLowBattery());
@@ -66,8 +69,8 @@ public class DeviceDTOTest {
         assertTrue(device.isReachable());
         assertFalse(device.hasLowBattery());
 
-        List<MessageDTO> messages = Arrays.asList(createMessage(MessageDTO.TYPE_DEVICE_LOW_BATTERY),
-                createMessage(MessageDTO.TYPE_DEVICE_UNREACHABLE));
+        List<MessageDTO> messages = Arrays.asList(createMessage(TYPE_DEVICE_LOW_BATTERY),
+                createMessage(TYPE_DEVICE_UNREACHABLE));
         device.setMessageList(messages);
 
         assertEquals(messages, device.getMessageList());
@@ -92,8 +95,8 @@ public class DeviceDTOTest {
         assertTrue(device.isReachable());
         assertFalse(device.hasLowBattery());
 
-        List<MessageDTO> messages = Arrays.asList(createMessage(MessageDTO.TYPE_DEVICE_LOW_BATTERY),
-                createMessage(MessageDTO.TYPE_DEVICE_UNREACHABLE));
+        List<MessageDTO> messages = Arrays.asList(createMessage(TYPE_DEVICE_LOW_BATTERY),
+                createMessage(TYPE_DEVICE_UNREACHABLE));
         device.setMessageList(messages);
 
         assertEquals(messages, device.getMessageList());
@@ -118,8 +121,8 @@ public class DeviceDTOTest {
         assertTrue(device.isReachable());
         assertFalse(device.hasLowBattery());
 
-        List<MessageDTO> messages = Arrays.asList(createMessage(MessageDTO.TYPE_DEVICE_LOW_BATTERY),
-                createMessage(MessageDTO.TYPE_DEVICE_UNREACHABLE));
+        List<MessageDTO> messages = Arrays.asList(createMessage(TYPE_DEVICE_LOW_BATTERY),
+                createMessage(TYPE_DEVICE_UNREACHABLE));
         device.setMessageList(messages);
 
         assertEquals(messages, device.getMessageList());

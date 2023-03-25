@@ -623,7 +623,7 @@ public class LivisiBridgeHandler extends BaseBridgeHandler
             logger.trace("Message: {}", gson.toJson(message));
             logger.trace("Messagetype: {}", message.getType());
         }
-        if (MessageDTO.TYPE_DEVICE_LOW_BATTERY.equals(message.getType()) && message.getDevices() != null) {
+        if (message.isTypeDeviceLowBattery() && message.getDevices() != null) {
             for (final String link : message.getDevices()) {
                 final Optional<DeviceDTO> device = deviceStructMan.refreshDevice(LinkDTO.getId(link), isSHCClassic());
                 notifyDeviceStatusListener(event.getSourceId(), device);
