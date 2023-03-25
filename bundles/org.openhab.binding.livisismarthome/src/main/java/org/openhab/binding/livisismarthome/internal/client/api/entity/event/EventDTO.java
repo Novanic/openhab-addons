@@ -111,9 +111,7 @@ public class EventDTO extends BaseEventDTO {
         if (linkType != null && !LinkDTO.LINK_TYPE_UNKNOWN.equals(linkType)
                 && !LinkDTO.LINK_TYPE_SHC.equals(linkType)) {
             if (source != null) {
-                String sourceId = source.replace(linkType, "");
-                sourceId = sourceId.replace("-", "");
-                return sourceId;
+                return source.replace(linkType, "");
             }
         }
         return null;
