@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="tesla"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<thing-type id="wallconnector">
+
+		<label>Tesla Wall Connector</label>
+		<description>A Tesla Wall Connector</description>
+
+		<channels>
+			<channel id="vehicleconnected" typeId="connectorvehicleconnected"/>
+			<channel id="sessionduration" typeId="connectorsessionduration"/>
+			<channel id="sessionenergy" typeId="connectorsessionenergy"/>
+		</channels>
+
+		<config-description>
+			<parameter name="host" type="text" required="true">
+				<label>Host</label>
+				<description>Host name or local IP address of the wall connector</description>
+			</parameter>
+		</config-description>
+
+	</thing-type>
+
+</thing:thing-descriptions>

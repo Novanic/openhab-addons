@@ -679,4 +679,23 @@
 		<description>Indicates if the wiperblade heater is switched on</description>
 		<state readOnly="true"></state>
 	</channel-type>
+	<channel-type id="connectorvehicleconnected">
+		<item-type>Switch</item-type>
+		<label>Vehicle Connected</label>
+		<description>True when a vehicle is connected, otherwise false</description>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="connectorsessionduration">
+		<item-type>Number:Time</item-type>
+		<label>Session Duration</label>
+		<description>Duration of the current session (in seconds)</description>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="connectorsessionenergy">
+		<item-type>Number:Energy</item-type>
+		<label>Session Energy</label>
+		<description>Energy which was delivered via the connector during the current session (in kWh)</description>
+		<category>Energy</category>
+		<state readOnly="true"/>
+	</channel-type>
 </thing:thing-descriptions>
