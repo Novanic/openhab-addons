@@ -51,7 +51,7 @@ import com.google.gson.Gson;
 @NonNullByDefault
 public class TeslaWallConnectorHandler extends BaseThingHandler {
 
-    private static final BigDecimal MAX_STANDBY_POWER = BigDecimal.TEN;
+    private static final BigDecimal MAX_STANDBY_WH = BigDecimal.valueOf(20);
 
     private static final String PROTOCOL = "http://";
     private static final String VERSION_URL = "/api/1/version";
@@ -150,18 +150,11 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
 
     private static boolean isCharging(boolean isVehicleConnected, BigDecimal sessionEnergyWh,
             BigDecimal previousSessionEnergyWh) {
-        final boolean isCharging;
+
         if (isVehicleConnected) {
-            if (sessionEnergyWh.compareTo(MAX_STANDBY_POWER) > 0) {
-                isCharging = true;
-            } else {
-                // We suggest that it is not charging anymore when there is currently no load and there was already
-                // no load 5 minutes before (at the previous refresh).
-                isCharging = previousSessionEnergyWh.compareTo(MAX_STANDBY_POWER) > 0;
-            }
-        } else {
-            isCharging = false;
+            BigDecimal differenceSinceLastRefresh = previousSessionEnergyWh.subtract(sessionEnergyWh);
+            return MAX_STANDBY_WH.compareTo(differenceSinceLastRefresh) < 0;
         }
-        return isCharging;
+        return false;
     }
 }
