@@ -205,6 +205,7 @@ The wall connector supports these channels:
 | vehicleconnected | Switch        | Vehicle Connected | True when a vehicle is connected, otherwise false                                |
 | sessionduration  | Number:Time   | Session Duration  | Duration of the current session (in seconds)                                     |
 | sessionenergy    | Number:Energy | Session Energy    | Energy which was delivered via the connector during the current session (in kWh) |
+| sessioncharging  | Switch        | Session Charging  | True when a vehicle is charging, otherwise false                                 |
 
 
 ## Example

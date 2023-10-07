@@ -698,4 +698,10 @@
 		<category>Energy</category>
 		<state readOnly="true"/>
 	</channel-type>
+	<channel-type id="connectorsessioncharging">
+		<item-type>Switch</item-type>
+		<label>Session Charging</label>
+		<description>True when a vehicle is charging, otherwise false</description>
+		<state readOnly="true"/>
+	</channel-type>
 </thing:thing-descriptions>

@@ -51,6 +51,8 @@ import com.google.gson.Gson;
 @NonNullByDefault
 public class TeslaWallConnectorHandler extends BaseThingHandler {
 
+    private static final BigDecimal MAX_STANDBY_POWER = BigDecimal.TEN;
+
     private static final String PROTOCOL = "http://";
     private static final String VERSION_URL = "/api/1/version";
     private static final String VITALS_URL = "/api/1/vitals";
@@ -59,6 +61,8 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
 
     private final HttpClient httpClient;
     private final Gson gson;
+
+    private BigDecimal previousSessionEnergyWh = BigDecimal.ZERO;
 
     public TeslaWallConnectorHandler(Thing thing, HttpClientFactory httpClientFactory) {
         super(thing);
@@ -96,16 +100,21 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
 
     private void refreshChannels(@Nullable VitalsDTO vitals) {
         if (vitals != null) {
-            updateState(CHANNEL_CONNECTOR_CONTACTOR_VEHICLE_CONNECTED, OnOffType.from(vitals.isVehicleConnected()));
+            final boolean isVehicleConnected = vitals.isVehicleConnected();
+            updateState(CHANNEL_CONNECTOR_CONTACTOR_VEHICLE_CONNECTED, OnOffType.from(isVehicleConnected));
             updateState(CHANNEL_CONNECTOR_SESSION_DURATION,
                     QuantityType.valueOf((double) vitals.getSessionDurationInSeconds(), Units.SECOND));
 
-            BigDecimal sessionEnergyKWh = BigDecimal.valueOf(vitals.getSessionEnergyWh());
-            sessionEnergyKWh = sessionEnergyKWh.setScale(3, RoundingMode.HALF_UP);
-            sessionEnergyKWh = sessionEnergyKWh.divide(BigDecimal.valueOf(1000), RoundingMode.HALF_UP);
+            BigDecimal sessionEnergyWh = BigDecimal.valueOf(vitals.getSessionEnergyWh());
+            BigDecimal sessionEnergyKWh = sessionEnergyWh.setScale(3, RoundingMode.HALF_UP)
+                    .divide(BigDecimal.valueOf(1000), RoundingMode.HALF_UP);
+
+            final boolean isCharging = isCharging(isVehicleConnected, sessionEnergyWh, previousSessionEnergyWh);
+            updateState(CHANNEL_CONNECTOR_SESSION_CHARGING, OnOffType.from(isCharging));
 
             updateState(CHANNEL_CONNECTOR_SESSION_ENERGY,
                     QuantityType.valueOf(sessionEnergyKWh.doubleValue(), Units.KILOWATT_HOUR));
+            previousSessionEnergyWh = sessionEnergyWh;
 
             updateStatus(ThingStatus.ONLINE);
         } else {
@@ -137,5 +146,22 @@ public class TeslaWallConnectorHandler extends BaseThingHandler {
             updateStatusOfflineNotReachable();
             return null;
         }
+    }
+
+    private static boolean isCharging(boolean isVehicleConnected, BigDecimal sessionEnergyWh,
+            BigDecimal previousSessionEnergyWh) {
+        final boolean isCharging;
+        if (isVehicleConnected) {
+            if (sessionEnergyWh.compareTo(MAX_STANDBY_POWER) > 0) {
+                isCharging = true;
+            } else {
+                // We suggest that it is not charging anymore when there is currently no load and there was already
+                // no load 5 minutes before (at the previous refresh).
+                isCharging = previousSessionEnergyWh.compareTo(MAX_STANDBY_POWER) > 0;
+            }
+        } else {
+            isCharging = false;
+        }
+        return isCharging;
     }
 }
