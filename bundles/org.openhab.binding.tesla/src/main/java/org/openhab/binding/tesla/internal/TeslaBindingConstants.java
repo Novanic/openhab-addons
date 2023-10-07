@@ -104,6 +104,7 @@ public class TeslaBindingConstants {
     public static final String CHANNEL_CONNECTOR_CONTACTOR_VEHICLE_CONNECTED = "vehicleconnected";
     public static final String CHANNEL_CONNECTOR_SESSION_DURATION = "sessionduration";
     public static final String CHANNEL_CONNECTOR_SESSION_ENERGY = "sessionenergy";
+    public static final String CHANNEL_CONNECTOR_SESSION_CHARGING = "sessioncharging";
 
     // thing configurations
     public static final String CONFIG_ALLOWWAKEUP = "allowWakeup";

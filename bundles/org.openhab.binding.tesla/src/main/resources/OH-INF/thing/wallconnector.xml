@@ -13,6 +13,7 @@
 			<channel id="vehicleconnected" typeId="connectorvehicleconnected"/>
 			<channel id="sessionduration" typeId="connectorsessionduration"/>
 			<channel id="sessionenergy" typeId="connectorsessionenergy"/>
+			<channel id="sessioncharging" typeId="connectorsessioncharging"/>
 		</channels>
 
 		<config-description>
