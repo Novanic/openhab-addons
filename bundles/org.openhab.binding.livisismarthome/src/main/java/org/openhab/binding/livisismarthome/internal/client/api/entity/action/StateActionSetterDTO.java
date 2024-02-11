@@ -44,6 +44,8 @@ public class StateActionSetterDTO extends ActionDTO {
             params.setValue(new BooleanActionParamDTO(CONSTANT, state));
         } else if (CapabilityDTO.TYPE_ALARMACTUATOR.equals(capabilityType)) {
             params.setOnState(new BooleanActionParamDTO(CONSTANT, state));
+        } else if (CapabilityDTO.TYPE_SIRENACTUATOR.equals(capabilityType)) {
+            params.setOnState(new BooleanActionParamDTO(CONSTANT, state));
         } else if (CapabilityDTO.TYPE_THERMOSTATACTUATOR.equals(capabilityType)) {
             final String operationMode;
             if (state) {

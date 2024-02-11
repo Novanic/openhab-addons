@@ -120,6 +120,8 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
             commandSetOperationMode(command, bridgeHandler);
         } else if (CHANNEL_ALARM.equals(channelUID.getId())) {
             commandSwitchAlarm(command, bridgeHandler);
+        } else if (CHANNEL_SIREN.equals(channelUID.getId())) {
+            commandSwitchSiren(command, bridgeHandler);
         } else {
             logger.debug("UNSUPPORTED channel {} for device {}.", channelUID.getId(), deviceId);
         }
@@ -211,6 +213,12 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
     private void commandSwitchAlarm(Command command, LivisiBridgeHandler bridgeHandler) {
         if (command instanceof OnOffType) {
             bridgeHandler.commandSwitchAlarm(deviceId, OnOffType.ON.equals(command));
+        }
+    }
+
+    private void commandSwitchSiren(Command command, LivisiBridgeHandler bridgeHandler) {
+        if (command instanceof OnOffType) {
+            bridgeHandler.commandSwitchSiren(deviceId, OnOffType.ON.equals(command));
         }
     }
 
@@ -473,6 +481,10 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
         } else if (capability.isTypeAlarmActuator()) {
             capabilityState.setAlarmActuatorState(event.getProperties().getOnState());
 
+            // SirenActuator
+        } else if (capability.isTypeSirenActuator()) {
+            capabilityState.setSirenActuatorState(event.getProperties().getOnState());
+
             // MotionDetectionSensor
         } else if (capability.isTypeMotionDetectionSensor()) {
             capabilityState.setMotionDetectionSensorState(event.getProperties().getMotionDetectedCount());
@@ -637,6 +649,9 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
                 break;
             case CapabilityDTO.TYPE_ALARMACTUATOR:
                 updateAlarmActuatorChannels(capability);
+                break;
+            case CapabilityDTO.TYPE_SIRENACTUATOR:
+                updateSirenActuatorChannels(capability);
                 break;
             case CapabilityDTO.TYPE_MOTIONDETECTIONSENSOR:
                 updateMotionDetectionSensorChannels(capability);
@@ -807,6 +822,15 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
         final Boolean alarmState = capability.getCapabilityState().getAlarmActuatorState();
         if (alarmState != null) {
             updateState(CHANNEL_ALARM, OnOffType.from(alarmState));
+        } else {
+            logStateNull(capability);
+        }
+    }
+
+    private void updateSirenActuatorChannels(CapabilityDTO capability) {
+        final Boolean sirenState = capability.getCapabilityState().getSirenActuatorState();
+        if (sirenState != null) {
+            updateState(CHANNEL_SIREN, OnOffType.from(sirenState));
         } else {
             logStateNull(capability);
         }

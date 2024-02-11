@@ -140,6 +140,14 @@
 		<category>Alarm</category>
 	</channel-type>
 
+	<!-- SirenActuator Channel -->
+	<channel-type id="sirenActuator">
+		<item-type>Switch</item-type>
+		<label>Siren</label>
+		<description>Switches the siren on/off</description>
+		<category>Siren</category>
+	</channel-type>
+
 	<!-- MotionDetectionSensor Channel -->
 	<channel-type id="motionDetectionSensor">
 		<item-type>Number</item-type>

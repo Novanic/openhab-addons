@@ -298,6 +298,14 @@ public class LivisiClient {
     }
 
     /**
+     * Sets the siren state.
+     */
+    public void setSirenActuatorState(final String capabilityId, final boolean sirenState) throws IOException {
+        executePost(createActionURL(),
+                new StateActionSetterDTO(capabilityId, CapabilityDTO.TYPE_SIRENACTUATOR, sirenState));
+    }
+
+    /**
      * Load the device and returns a {@link List} of {@link DeviceDTO}s.
      * VariableActuators are returned additionally (independent from the device ids),
      * because VariableActuators are everytime available and never have a device state.
