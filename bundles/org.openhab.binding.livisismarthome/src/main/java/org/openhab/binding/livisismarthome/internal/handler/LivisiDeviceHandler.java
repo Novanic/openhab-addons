@@ -68,6 +68,10 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
     private static final int MAX_TEMPERATURE_CELSIUS = 30;
     private static final String LONG_PRESS = "LongPress";
     private static final String SHORT_PRESS = "ShortPress";
+    private static final String SIREN_ALARM = "Alarm";
+    private static final String SIREN_NOTIFICATION = "Notification";
+    private static final String SIREN_FEEDBACK = "Feedback";
+    private static final String SIREN_NONE = "NONE";
 
     private final Logger logger = LoggerFactory.getLogger(LivisiDeviceHandler.class);
     private final Object lock = new Object();
@@ -120,8 +124,12 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
             commandSetOperationMode(command, bridgeHandler);
         } else if (CHANNEL_ALARM.equals(channelUID.getId())) {
             commandSwitchAlarm(command, bridgeHandler);
-        } else if (CHANNEL_SIREN.equals(channelUID.getId())) {
-            commandSwitchSiren(command, bridgeHandler);
+        } else if (CHANNEL_SIREN_ALARM.equals(channelUID.getId())) {
+            commandSwitchSirenAlarm(command, SIREN_ALARM, bridgeHandler);
+        } else if (CHANNEL_SIREN_NOTIFICATION.equals(channelUID.getId())) {
+            commandSwitchSirenAlarm(command, SIREN_NOTIFICATION, bridgeHandler);
+        } else if (CHANNEL_SIREN_FEEDBACK.equals(channelUID.getId())) {
+            commandSwitchSirenAlarm(command, SIREN_FEEDBACK, bridgeHandler);
         } else {
             logger.debug("UNSUPPORTED channel {} for device {}.", channelUID.getId(), deviceId);
         }
@@ -216,9 +224,11 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
         }
     }
 
-    private void commandSwitchSiren(Command command, LivisiBridgeHandler bridgeHandler) {
-        if (command instanceof OnOffType) {
-            bridgeHandler.commandSwitchSiren(deviceId, OnOffType.ON.equals(command));
+    private void commandSwitchSirenAlarm(Command command, String notificationSound, LivisiBridgeHandler bridgeHandler) {
+        if (command instanceof OnOffType && OnOffType.ON.equals(command)) {
+            bridgeHandler.commandSwitchSiren(deviceId, notificationSound);
+        } else {
+            bridgeHandler.commandSwitchSiren(deviceId, SIREN_NONE);
         }
     }
 
@@ -483,7 +493,7 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
 
             // SirenActuator
         } else if (capability.isTypeSirenActuator()) {
-            capabilityState.setSirenActuatorState(event.getProperties().getOnState());
+            capabilityState.setSirenActuatorState(event.getProperties().getActiveChannel());
 
             // MotionDetectionSensor
         } else if (capability.isTypeMotionDetectionSensor()) {
@@ -828,9 +838,24 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
     }
 
     private void updateSirenActuatorChannels(CapabilityDTO capability) {
-        final Boolean sirenState = capability.getCapabilityState().getSirenActuatorState();
+        final String sirenState = capability.getCapabilityState().getSirenActuatorState();
         if (sirenState != null) {
-            updateState(CHANNEL_SIREN, OnOffType.from(sirenState));
+            switch (sirenState) {
+                case SIREN_ALARM:
+                    updateState(CHANNEL_SIREN_ALARM, OnOffType.ON);
+                    break;
+                case SIREN_NOTIFICATION:
+                    updateState(CHANNEL_SIREN_NOTIFICATION, OnOffType.ON);
+                    break;
+                case SIREN_FEEDBACK:
+                    updateState(CHANNEL_SIREN_FEEDBACK, OnOffType.ON);
+                    break;
+                default:
+                    // "None" and everything else switches the siren sound off
+                    updateState(CHANNEL_SIREN_ALARM, OnOffType.OFF);
+                    updateState(CHANNEL_SIREN_NOTIFICATION, OnOffType.OFF);
+                    updateState(CHANNEL_SIREN_FEEDBACK, OnOffType.OFF);
+            }
         } else {
             logStateNull(capability);
         }

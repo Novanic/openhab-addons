@@ -768,7 +768,7 @@ public class LivisiBridgeHandler extends BaseBridgeHandler
      * @param deviceId device id
      * @param sirenState siren state (boolean)
      */
-    public void commandSwitchSiren(final String deviceId, final boolean sirenState) {
+    public void commandSwitchSiren(final String deviceId, final String sirenState) {
         executeCommand(deviceId, CapabilityDTO.TYPE_SIRENACTUATOR,
                 (capabilityId) -> client.setSirenActuatorState(capabilityId, sirenState));
     }

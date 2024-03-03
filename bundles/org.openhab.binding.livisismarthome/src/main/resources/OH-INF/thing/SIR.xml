@@ -13,7 +13,9 @@
 		<description>A battery powered indoor siren.</description>
 
 		<channels>
-			<channel id="siren" typeId="sirenActuator"/>
+			<channel id="sirenAlarm" typeId="sirenAlarmActuator"/>
+			<channel id="sirenNotification" typeId="sirenNotificationActuator"/>
+			<channel id="sirenFeedback" typeId="sirenFeedbackActuator"/>
 			<channel id="batteryLow" typeId="system.low-battery"/>
 		</channels>
 

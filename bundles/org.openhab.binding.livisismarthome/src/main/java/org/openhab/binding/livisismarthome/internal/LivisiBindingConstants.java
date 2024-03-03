@@ -143,7 +143,9 @@ public class LivisiBindingConstants {
     public static final String CHANNEL_CONTACT = "contact";
     public static final String CHANNEL_SMOKE = "smoke";
     public static final String CHANNEL_ALARM = "alarm";
-    public static final String CHANNEL_SIREN = "siren";
+    public static final String CHANNEL_SIREN_ALARM = "sirenAlarm";
+    public static final String CHANNEL_SIREN_NOTIFICATION = "sirenNotification";
+    public static final String CHANNEL_SIREN_FEEDBACK = "sirenFeedback";
     public static final String CHANNEL_MOTION_COUNT = "motionCount";
     public static final String CHANNEL_LUMINANCE = "luminance";
     public static final String CHANNEL_OPERATION_MODE = "operationMode";

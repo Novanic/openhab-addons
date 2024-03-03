@@ -300,9 +300,9 @@ public class LivisiClient {
     /**
      * Sets the siren state.
      */
-    public void setSirenActuatorState(final String capabilityId, final boolean sirenState) throws IOException {
+    public void setSirenActuatorState(final String capabilityId, final String activeChannel) throws IOException {
         executePost(createActionURL(),
-                new StateActionSetterDTO(capabilityId, CapabilityDTO.TYPE_SIRENACTUATOR, sirenState));
+                new StateActionSetterDTO(capabilityId, CapabilityDTO.TYPE_SIRENACTUATOR, activeChannel));
     }
 
     /**

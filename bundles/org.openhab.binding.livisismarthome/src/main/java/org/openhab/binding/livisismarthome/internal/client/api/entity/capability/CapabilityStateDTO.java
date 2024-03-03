@@ -164,12 +164,12 @@ public class CapabilityStateDTO {
         getState().getOnState().setValue(on);
     }
 
-    public Boolean getSirenActuatorState() {
-        return getState().getOnState().getValue();
+    public String getSirenActuatorState() {
+        return getState().getActiveChannelState().getValue();
     }
 
-    public void setSirenActuatorState(final Boolean on) {
-        getState().getOnState().setValue(on);
+    public void setSirenActuatorState(final String activeChannel) {
+        getState().getActiveChannelState().setValue(activeChannel);
     }
 
     public Integer getMotionDetectionSensorState() {
