@@ -71,7 +71,7 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
     private static final String SIREN_ALARM = "Alarm";
     private static final String SIREN_NOTIFICATION = "Notification";
     private static final String SIREN_FEEDBACK = "Feedback";
-    private static final String SIREN_NONE = "NONE";
+    private static final String SIREN_NONE = "None";
 
     private final Logger logger = LoggerFactory.getLogger(LivisiDeviceHandler.class);
     private final Object lock = new Object();
@@ -125,11 +125,11 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
         } else if (CHANNEL_ALARM.equals(channelUID.getId())) {
             commandSwitchAlarm(command, bridgeHandler);
         } else if (CHANNEL_SIREN_ALARM.equals(channelUID.getId())) {
-            commandSwitchSirenAlarm(command, SIREN_ALARM, bridgeHandler);
+            commandSwitchSiren(command, SIREN_ALARM, bridgeHandler);
         } else if (CHANNEL_SIREN_NOTIFICATION.equals(channelUID.getId())) {
-            commandSwitchSirenAlarm(command, SIREN_NOTIFICATION, bridgeHandler);
+            commandSwitchSiren(command, SIREN_NOTIFICATION, bridgeHandler);
         } else if (CHANNEL_SIREN_FEEDBACK.equals(channelUID.getId())) {
-            commandSwitchSirenAlarm(command, SIREN_FEEDBACK, bridgeHandler);
+            commandSwitchSiren(command, SIREN_FEEDBACK, bridgeHandler);
         } else {
             logger.debug("UNSUPPORTED channel {} for device {}.", channelUID.getId(), deviceId);
         }
@@ -224,7 +224,7 @@ public class LivisiDeviceHandler extends BaseThingHandler implements DeviceStatu
         }
     }
 
-    private void commandSwitchSirenAlarm(Command command, String notificationSound, LivisiBridgeHandler bridgeHandler) {
+    private void commandSwitchSiren(Command command, String notificationSound, LivisiBridgeHandler bridgeHandler) {
         if (command instanceof OnOffType && OnOffType.ON.equals(command)) {
             bridgeHandler.commandSwitchSiren(deviceId, notificationSound);
         } else {
