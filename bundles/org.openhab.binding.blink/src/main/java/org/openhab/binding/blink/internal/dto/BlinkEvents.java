@@ -51,12 +51,8 @@ public class BlinkEvents {
             return !isDeletedEvent() && !isUpdatedEvent();
         }
 
-        public boolean isCamera() {
-            return "catalina".equals(device);
-        }
-
         public boolean isCamera(CameraConfiguration config) {
-            return isCamera() && network_id == config.networkId && device_id == config.cameraId;
+            return device_id == config.cameraId && network_id == config.networkId;
         }
     }
 }
