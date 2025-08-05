@@ -105,7 +105,7 @@
 		<description>Motion Detection Status</description>
 		<category>Camera</category>
 		<tags>
-			<tag>Switchable</tag>
+			<tag>Switch</tag>
 		</tags>
 	</channel-type>
 
@@ -115,7 +115,7 @@
 		<description>Save snapshot as thumbnail</description>
 		<category>Camera</category>
 		<tags>
-			<tag>Switchable</tag>
+			<tag>Switch</tag>
 		</tags>
 	</channel-type>
 
@@ -132,7 +132,7 @@
 		<description>Temperature measured by Kamera</description>
 		<category>Temperature</category>
 		<tags>
-			<tag>CurrentTemperature</tag>
+			<tag>Temperature</tag>
 		</tags>
 		<state pattern="%.1f °F" readOnly="true"/>
 	</channel-type>
@@ -142,7 +142,7 @@
 		<label>Armed</label>
 		<description>Network armed (start recording/reporting motion events for enabled cameras)</description>
 		<tags>
-			<tag>Switchable</tag>
+			<tag>Switch</tag>
 		</tags>
 	</channel-type>
 
